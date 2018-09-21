@@ -121,6 +121,10 @@ int plat_sdl_change_video_mode(int w, int h, int force)
     SDL_PumpEvents();
 
     plat_sdl_screen = SDL_SetVideoMode(w, h, 16, SDL_HWSURFACE );
+
+    //hide cursor
+    SDL_ShowCursor(SDL_DISABLE);
+
     if (plat_sdl_screen == NULL) {
       fprintf(stderr, "SDL_SetVideoMode failed: %s\n", SDL_GetError());
       return -1;
@@ -211,6 +215,10 @@ int plat_sdl_init(void)
   ret = plat_sdl_change_video_mode(g_menuscreen_w, g_menuscreen_h, 1);
   if (ret != 0) {
     plat_sdl_screen = SDL_SetVideoMode(0, 0, 16, SDL_SWSURFACE);
+    //hide cursor
+
+    SDL_ShowCursor(SDL_DISABLE);
+
     if (plat_sdl_screen == NULL) {
       fprintf(stderr, "SDL_SetVideoMode failed: %s\n", SDL_GetError());
       goto fail;
